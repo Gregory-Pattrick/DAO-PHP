@@ -9,6 +9,4 @@ spl_autoload_register(function($class_name){  //Criando uma função de auto loa
     }
 });
 
-
-
 ?>

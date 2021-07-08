@@ -18,7 +18,7 @@ class Sql extends PDO {  //Classe Sql extendendo da classe própria do PHP
         foreach ($parameters as $key => $value){   //Associando parametros ao comando basicamente define quais são os parametros
                                                     //Que a execução do codigo no banco vai fazer
 
-            $this->setParam($key, $value); //Define o valor de consulta com o valor especificado
+            $this->setParam($statment, $key, $value); //Define o valor de consulta com o valor especificado
         }
 
     }
