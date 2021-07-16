@@ -35,8 +35,29 @@ require_once("config.php"); //Chamando o config no qual busca as classes
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Carrega um Usuário usando o login e a senha
 
+// $usuario = new Usuario();
+// $usuario->Carrega("greg", "123");
+
+// echo $usuario;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Insirindo um novo usuario com procedural
+
+//$aluno = new Usuario("João", "987"); //Usando construct 
+
+//$aluno->setDeslogin("aluno");  //Não usando o construct 
+//$aluno->setDessenha("@lun0"); //Não usando o construct 
+
+//$aluno->insert(); //Chamando a função
+
+//echo $aluno; //Apresentando o resultado
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $usuario = new Usuario();
-$usuario->Carrega("greg", "123");
+
+$usuario->loadById(5);
+
+$usuario->update("professor", "2345678");
 
 echo $usuario;
 

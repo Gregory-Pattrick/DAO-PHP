@@ -47,12 +47,7 @@ class Usuario{ //Criando a classe usuario
 
         if(count($results) > 0) { //Verifica se tem algum resultado no banco. 
 
-            $row = $results[0]; //Criando a variavel de index 0
-
-            $this->setIdusuario($row['idusuario']);  //Neste ponto temos os atributos preenchidos com as informações do Banco
-            $this->setDeslogin($row['deslogin']); //Recebe os dados que já retornaram associativos e os envia para os Seters
-            $this->setDessenha($row['dessenha']);
-            $this->setDtcadastro(new DateTime($row['dtcadastro'])); //New DateTime para tribuir a informação em Data. 
+            $this->setData($results[0]);
 
         }
     }
@@ -79,20 +74,15 @@ class Usuario{ //Criando a classe usuario
 
         $sql = new Sql();
 
-        $result = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(
+        $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(
             ":LOGIN"=>$login, 
             "PASSWORD"=>$password
         ));
 
         
-        if (count($result) > 0){
+        if (count($results) > 0){
 
-            $roww = $result[0];
-
-            $this->setIdusuario($roww['idusuario']);
-            $this->setDeslogin($roww['deslogin']);
-            $this->setDessenha($roww['dessenha']);
-            $this->setDtcadastro(new DateTime($roww['dtcadastro']));
+            $this->setData($results[0]);
 
         } else {
 
@@ -100,6 +90,50 @@ class Usuario{ //Criando a classe usuario
 
         }
 
+    }
+
+    public function setData($data){
+
+        $this->setIdusuario($data['idusuario']);  //Neste ponto temos os atributos preenchidos com as informações do Banco
+        $this->setDeslogin($data['deslogin']); //Recebe os dados que já retornaram associativos e os envia para os Seters
+        $this->setDessenha($data['dessenha']);
+        $this->setDtcadastro(new DateTime($data['dtcadastro'])); //New DateTime para tribuir a informação em Data. 
+
+    }
+
+    public function insert(){
+
+        $sql = new Sql();
+
+        $results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
+            ':LOGIN'=>$this->getDeslogin(),
+            ':PASSWORD'=>$this->getDessenha()
+        ));
+
+        if (count($results) >0) {
+            $this->setData($results[0]);
+        }
+
+    }
+
+    public function update($login, $password){
+
+        $this->setDeslogin($login);
+        $this->setDessenha($password);
+
+        $sql = new Sql();
+
+        $sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWORD WHERE idusuario = :ID", array(
+            ':LOGIN'=>$this->getDeslogin(),
+            ':PASSWORD'=>$this->getDessenha(),
+            ':ID'=>$this->getIdusuario()
+        ));
+    }
+
+    public function __construct($login = "", $password = "")
+    {
+        $this->setDeslogin($login);
+        $this->setDessenha($password);
     }
 
     public function __toString(){ //toString que quando se da um echo no objeto em vez de mostrar a estrutura ele 
