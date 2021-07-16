@@ -12,11 +12,32 @@ require_once("config.php"); //Chamando o config no qual busca as classes
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//Carrega um Usuário com todos os dados.
+//$root = new Usuario(); //Chamando a classe e a atribuindo a uma variavel
 
-$root = new Usuario();
+//$root->loadById(1); //Chamando o metodo publico criado dentro da class Usuario
 
-$root->loadById(1);
+//echo $root; //Retornando os dados
 
-echo $root;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Carrega uma Lista de Usuários
+
+//$lista = Usuario::getList();  //Chamando uma função statica na qual não precisa de instância
+
+//echo json_encode($lista);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Carrega uma lista de Usuários buscando pelo Login
+//$search = Usuario::search("gr"); //Atribuindo a classe a variavel e definindo a string de busca
+
+//echo json_encode($search);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Carrega um Usuário usando o login e a senha
+
+$usuario = new Usuario();
+$usuario->Carrega("greg", "123");
+
+echo $usuario;
 
 ?>
