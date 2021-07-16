@@ -36,7 +36,7 @@ require_once("config.php"); //Chamando o config no qual busca as classes
 //Carrega um Usuário usando o login e a senha
 
 // $usuario = new Usuario();
-// $usuario->Carrega("greg", "123");
+// $usuario->login("greg", "123");
 
 // echo $usuario;
 
@@ -53,11 +53,23 @@ require_once("config.php"); //Chamando o config no qual busca as classes
 //echo $aluno; //Apresentando o resultado
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Atualizar os dados
+// $usuario = new Usuario();
+
+// $usuario->loadById(5);
+
+// $usuario->update("professor", "2345678");
+
+// echo $usuario;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Apagando o Usuário
+
 $usuario = new Usuario();
 
-$usuario->loadById(5);
+$usuario->loadById(4);
 
-$usuario->update("professor", "2345678");
+$usuario->delete();
 
 echo $usuario;
 
